@@ -1,0 +1,28 @@
+import re
+
+def check_password(password):
+    # Проверяем дину пароля
+    if len(password) <= 9:
+        return False
+    # Проверяем наличие символов верхнего регистра
+    if not any (l.isupper() for l in password):
+        return False
+    # Проверяем наличие символов нижнего регистра
+    if not any (l.islower() for l in password):
+        return False
+    # Проверяет наличие цифр
+    if not any (l.isdigit() for l in password):
+        return False
+    # Проверяем наличие специальных символов из заданного списка
+    if not re.search("[!@#$%&]", password):
+        return False
+    
+    return True
+    # Попытки ввода пароля до успешного завершения 
+while True:
+    password = input("Введите ваш пароль: ")
+    if check_password(password):
+        print("Действительный пароль")
+        break
+    else:
+        print("Пароль не соответствует требованиям")
